@@ -1,9 +1,9 @@
 [submodule "themes/blist"]
 	path = themes/blist
 	url = https://github.com/apvarun/blist-hugo-theme.git
-[submodule "themes/walden"]
-	path = themes/walden
-	url = git@github.com:Homecat805/hugo-theme-walden.git
-[submodule "themes/ananke"]
-	path = themes/ananke
-	url = https://github.com/budparr/gohugo-theme-ananke.git
+#[submodule "themes/walden"]
+#	path = themes/walden
+#	url = git@github.com:Homecat805/hugo-theme-walden.git
+#[submodule "themes/ananke"]
+#	path = themes/ananke
+#	url = https://github.com/budparr/gohugo-theme-ananke.git
