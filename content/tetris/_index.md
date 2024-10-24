@@ -1,8 +1,8 @@
 ---
 author: "苒芃"
-title: "俄罗斯方块"
+title: "俄罗斯方块(1)"
 date: 2024-10-17T21:09:51+08:00
-description: "这是一款可以无限玩的俄罗斯方块游戏。"
+description: "在AI的辅助下实现一个无限玩的方块第一篇."
 tags: ["方块"]
 keywords: ["俄罗斯方块", "无限", "异形"]
 thumbnail: face.png
