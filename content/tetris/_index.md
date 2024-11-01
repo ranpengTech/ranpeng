@@ -59,11 +59,11 @@ weight: 3
 
 - 一般chatAI会给出比较详细的步骤，比如通义千问的回答如图1
   
-  ![](/home/armitel/ranpeng/home/content/tetris/tu1.png)
+  ![图1](./tu1.png)
 
 - 并且还给出了比较详细的代码，如图2
   
-  ![](/home/armitel/ranpeng/home/content/tetris/tu2.png)
+  ![图2](./tu2.png)
 
 - 虽然按照步骤能实现，但是其代码却有好些需要修改的地方
 
@@ -73,51 +73,40 @@ weight: 3
 
 这一步主要是安装游戏引擎Phaser和创建项目文件，最重要是创建项目入口HTML文件，如图3
 
-![](/home/armitel/ranpeng/home/content/tetris/tu3.png)
+![图3](./tu3.png)
 
 ###### 2.2 初始化 Phaser 游戏
 
 这一步主要是引入Phaser后初始化和配置Phaser，如图4
 
-
-![](/home/armitel/ranpeng/home/content/tetris/tu4.png)
+![图4](./tu4.png)
 
 ###### 2.3 创建游戏界面
 
 这一步主要是创建游戏网格，初始化游戏背景，如图5
 
-![](/home/armitel/ranpeng/home/content/tetris/tu5.png)
-
+![图5](./tu5.png)
 
 ###### 2.4 创建方块
 
 这一步主要是定义方块类型，并创建一个方块类来管理方块的显示和逻辑，如图6
 
-![](/home/armitel/ranpeng/home/content/tetris/tu6.png)
-
-
-
+![图6](./tu6.png)
 
 ###### 2.5 添加游戏逻辑
 
 这一步主要是创建方块，使其能下落，旋转和堆积等游戏逻辑，并且添加键盘事件监听，使玩家能操作方块，如图7
 
-
-![](/home/armitel/ranpeng/home/content/tetris/tu7.png)
+![图7](./tu7.png)
 
 ###### 2.6 消除行
 
 这一步主要是添加消除满行的游戏逻辑并更新记录，如图8
 
-
-![](/home/armitel/ranpeng/home/content/tetris/tu8.png)
-
-
+![图8](./tu8.png)
 
 2.7 游戏结束
 这一步主要是判断游戏是否结束，因为要做无限玩，所以这个判断去掉了。
-
-
 
 ### 测试和调试
 
@@ -125,32 +114,41 @@ weight: 3
 
 1. 初始化运行发现背景方格并没有铺满，如图9，这是因为方格大小为20x20,总共10x20,并没有铺满300x600的屏幕，修改方格数量为15x30就可以了。
    
-   ![](/home/armitel/ranpeng/home/content/tetris/tu9.png)
+   ![图9](./tu9.png)
+
 2. 方块的初始位置并没有和网格对齐，如图10，这是方块初始位置的坐标原点不在top-left，需要在创建方块后增加调用block.setOrigin(0);修改方块的坐标原点。
    
-   ![](/home/armitel/ranpeng/home/content/tetris/tu10.png)
+   ![图10](./tu10.png)
+
 3. 左右移动后，形状就显示不全了，如图11，这是因为形状整体做移动会有问题，只需要将形状中的所有方块逐个做移动就可以了。
    
-   ![](/home/armitel/ranpeng/home/content/tetris/tu11.png)
+   ![图11](./tu11.png)
+
 4. 每次按键后处理都是随机次数的，这是将按键处理放到了游戏显示更新函数中，只需要注册按键逻辑到键盘事件监听中，如图12。
    
-   ![](/home/armitel/ranpeng/home/content/tetris/tu12.png)
+   ![图12](./tu12.png)
+
 5. 形状旋转后，并没有清除原来形状的显示，如图13，这是形状在旋转后并没有清理原来方块，直接创建了新的方块，只需在创建新方块之前，销毁当前的方块就可以了。
    
-   ![](/home/armitel/ranpeng/home/content/tetris/tu13.png)
+   ![图13](./tu13.png)
+
 6. 方块并不能自动落下，这是在显示更新逻辑中，根据lastFallTime变量来判断当前是否要向下移动，但是没有为lastFallTime初始化，将其初始化为0就可以了。
+
 7. 方块落下过程中没有到底就停止了，并且出现新方块，如图14，虽然改好了方块的显示，但是方块的移动判断逻辑中还使用默认网格为10x20，需要修改为15x30。
    
-   ![](/home/armitel/ranpeng/home/content/tetris/tu14.png)
+   ![图14](./tu14.png)
+
 8. 方块落下后会产生重叠，如图15，这是移动判断逻辑中方块的重叠判断中，在计算网格位置时没有从0开始算起点，导致方块总是重叠一个位置。
    
-   ![](/home/armitel/ranpeng/home/content/tetris/tu15.png)
+   ![图15](./tu15.png)
+
 9. 在方块堆积成行后却没有清除该行，如图16，这是在网格中虽然已经将该行消除，但是在显示中却没有清除该行的方块，只需要将保存在网格中的方块销毁并清理其显示就可以了。
    
-   ![](/home/armitel/ranpeng/home/content/tetris/tu16.png)
+   ![图16](./tu16.png)
+
 10. 在方块堆积成行后，该行数据和显示都已经清理了，但是上面的方块的显示却没有往下移动填满消除后的网格，如图17，这是网格中虽然已经将上面的方块往下移动了，但是其显示位置却还没有更新，和上一个问题类似，只需要在消除行后，更新一下现在网格中方块的显示位置就可以了。
     
-    ![](/home/armitel/ranpeng/home/content/tetris/tu17.png)
+    ![图17](./tu17.png)
 
 ### 结果分享
 
@@ -164,9 +162,3 @@ weight: 3
 - 这个0.1版本虽然可玩，但是没有做到无限玩，这需要进一步开发了。
 - 游戏界面看上去太丑了，要添加一些素材才行。
 - 暂时想到这么多，我会持续开发这个休闲小游戏，如果你想分享有意思的玩法，可以关注苒芃公众号，然后发消息给我。
-
-
-
-
-
-
